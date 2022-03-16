@@ -46,7 +46,13 @@ void auto_match_p2_3(auto_color_t color,auto_pos_t pos)
 }
 
 
-/* List of autonomous routines */
+/* List of autonomous routines
+ * It must be defined exactly like this
+ * Each entry in the list has 3 objects:
+ *  - the function to call (must have the color and position arguments)
+ *  - the position for which it is valid (SKILLS, POS_1, or POS_2)
+ *  - the name of the routine (shown on screen)
+ */
 const auto_routine_t auto_list[] =
 {
 	/* Robot skills options */
@@ -71,7 +77,9 @@ const auto_routine_t auto_list[] =
  */
 void initialize() 
 {
-	/* Call Auto Picker to initialize it */
+	/* Call Auto Picker to initialize it
+	 * Once this is called the picker will remain active until cleaned
+	 */
 	auto_picker(auto_list, sizeof(auto_list)/sizeof(auto_routine_t));
 }
 
