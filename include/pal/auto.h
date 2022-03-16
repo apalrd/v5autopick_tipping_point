@@ -55,6 +55,9 @@ void auto_picker(const auto_routine_t * list, size_t length);
 /* Function to run the picked autonomous */
 void auto_run(void);
 
+/* Function to clean up screen objects if you'd like to use the screen again */
+void auto_clean(void);
+
 
 #ifdef __cplusplus
 }

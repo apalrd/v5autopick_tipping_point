@@ -31,17 +31,20 @@ static const auto_pos_t active_color_mode[] =
 	AUTO_COLOR_SKILLS
 };
 
+/* LV field image object */
+lv_obj_t * fieldimg = NULL;
+
 /* Number of buttons we can fit on the side of the screen at once - will rescale
  * If you have more than this many autos per position, the rest won't show up
  */
-#define LIST_SIZE 5
+#define LIST_SIZE 8
 
 /* List box to select program */
-static lv_obj_t * list_btn[LIST_SIZE];
+static lv_obj_t * list_btn[LIST_SIZE] = {0};
 
 /* 5 buttons for starting positions (4 match, 1 skills) */
-static lv_obj_t * btn_pos[5];
-static char * btn_label[5] = 
+static lv_obj_t * btn_pos[5] = {0};
+static const char * btn_label[5] = 
 {
 	"Red 1",
 	"Red 2",
@@ -49,7 +52,7 @@ static char * btn_label[5] =
 	"Blue 2",
 	"Skills"
 };
-static lv_align_t btn_align[5] = 
+static const lv_align_t btn_align[5] = 
 {
 	LV_ALIGN_IN_TOP_LEFT,
 	LV_ALIGN_IN_BOTTOM_LEFT,
@@ -65,7 +68,7 @@ static lv_style_t style_gold_ina, style_gold_act;
 static lv_style_t style_white_ina, style_white_act;
 
 /* Styles associated with each starting position button in the inactive and active states */
-static lv_style_t * btn_styles[5][2] = 
+static lv_style_t * const btn_styles[5][2] = 
 {
 	{&style_red_ina, &style_red_act},
 	{&style_red_ina, &style_red_act},
@@ -76,7 +79,7 @@ static lv_style_t * btn_styles[5][2] =
 
 
 /* List callback */
-static  lv_res_t btn_list_cb(lv_obj_t * btn)
+static lv_res_t btn_list_cb(lv_obj_t * btn)
 {
 	/* Find the pointer that matches the callback */
 	int idx;
@@ -232,7 +235,7 @@ void auto_picker(const auto_routine_t * list, size_t length)
 
 	/* Draw image of the field */
     LV_IMG_DECLARE(field);
-    lv_obj_t * fieldimg = lv_img_create(lv_scr_act(),0);
+    fieldimg = lv_img_create(lv_scr_act(),0);
     lv_img_set_src(fieldimg, &field);
     lv_obj_align(fieldimg, 0, LV_ALIGN_IN_TOP_LEFT, 0, 0);
     lv_obj_set_size(fieldimg, 240, 240);
@@ -295,6 +298,37 @@ void auto_picker(const auto_routine_t * list, size_t length)
 
     /* Initially set active auto to -1 to indicate no selection */
     active_auto = -1;
+}
+
+/* Clean up all entities on the screen so it can be used by something else */
+void auto_clean(void)
+{
+	/* Destroy everything in the selector list */
+	for(int i = 0; i < LIST_SIZE; i++)
+	{
+		if(list_btn[i])
+		{
+			lv_obj_del(list_btn[i]);
+		}
+		list_btn[i] = NULL;
+	}
+
+	/* Destroy all 5 position buttons */
+	for(int i = 0; i < 5; i++)
+	{
+		if(btn_pos[i])
+		{
+			lv_obj_del(btn_pos[i]);
+		}
+		btn_pos[i] = NULL;
+	}
+	
+	/* Destroy the field */
+	if(fieldimg)
+	{
+		lv_obj_del(fieldimg);
+	}
+	fieldimg = NULL;
 }
 
 /* Run the selected autonomous */
