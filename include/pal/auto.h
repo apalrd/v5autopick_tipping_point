@@ -1,13 +1,8 @@
-/* Autonomous selector system
- * 
- * First, create an array of all autonomous programs as shown in the example
- * 
- * Next, call auto_picker(auton_list, auton_list_length) in Initialize to start the process
- * This will display a selector on the screen
- * 
- * When autonomous() is called, call auto_run() to execute the selected autonomous
+/* Auto Picker library for PROS V5
+ * Copyright (c) 2022 Andrew Palardy
+ * This code is subject to the BSD 2-clause 'Simplified' license
+ * See the LICENSE file for complete terms
  */
-
 #ifndef _AUTO_H_
 #define _AUTO_H_
 
