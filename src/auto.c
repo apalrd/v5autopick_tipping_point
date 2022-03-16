@@ -70,7 +70,7 @@ static const lv_align_t btn_align[5] =
 static lv_style_t style_red_ina, style_red_act;
 static lv_style_t style_blue_ina, style_blue_act;
 static lv_style_t style_gold_ina, style_gold_act;
-static lv_style_t style_white_ina, style_white_act;
+static lv_style_t style_list_ina, style_list_act;
 
 /* Styles associated with each starting position button in the inactive and active states */
 static lv_style_t * const btn_styles[5][2] = 
@@ -105,12 +105,12 @@ static lv_res_t btn_list_cb(lv_obj_t * btn)
 		if((list_btn[i]) && (i == idx))
 		{
 			/* Toggle on */
-			lv_obj_set_style(list_btn[i],&style_white_act);
+			lv_obj_set_style(list_btn[i],&style_list_act);
 		}
 		else if(list_btn[i])
 		{
 			/* Toggle off */
-			lv_obj_set_style(list_btn[i],&style_white_ina);
+			lv_obj_set_style(list_btn[i],&style_list_ina);
 		}
 	}
 
@@ -213,9 +213,9 @@ static  lv_res_t btn_pos_cb(lv_obj_t * btn)
 		lv_btn_set_action(list_btn[i],LV_BTN_ACTION_CLICK,btn_list_cb);
 
 		/* Set Style */
-		lv_btn_set_style(list_btn[i],LV_BTN_STYLE_INA,&style_white_ina);
-		lv_btn_set_style(list_btn[i],LV_BTN_STYLE_PR,&style_white_act);
-		lv_btn_set_style(list_btn[i],LV_BTN_STYLE_REL,&style_white_ina);
+		lv_btn_set_style(list_btn[i],LV_BTN_STYLE_INA,&style_list_ina);
+		lv_btn_set_style(list_btn[i],LV_BTN_STYLE_PR,&style_list_act);
+		lv_btn_set_style(list_btn[i],LV_BTN_STYLE_REL,&style_list_ina);
 
 		/* Size the button */
 		lv_obj_set_size(list_btn[i], bwidth, bheight);
@@ -297,9 +297,12 @@ void auto_picker(const auto_routine_t * list, size_t length)
 		lv_label_set_text(label,btn_label[i]);
 	}
 
-	/* Style for program selection buttons (white) */
-	lv_style_copy(&style_white_act,&style_gold_act);
-	lv_style_copy(&style_white_ina,&style_gold_ina);
+	/* Style for program selection buttons (high contrast) */
+	lv_style_copy(&style_list_ina,&style_gold_ina);
+	style_list_ina.body.main_color=LV_COLOR_LIME;
+	style_list_ina.body.grad_color=LV_COLOR_LIME;
+	lv_style_copy(&style_list_act,&style_list_ina);
+	style_list_act.body.border.color=LV_COLOR_WHITE;
 
     /* Initially set active auto to -1 to indicate no selection */
     active_auto = -1;
