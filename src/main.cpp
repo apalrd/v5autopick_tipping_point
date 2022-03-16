@@ -2,42 +2,47 @@
 #include "stdio.h"
 #include "pal/auto.h"
 
-/* Auto function examples */
+/* Auto function examples - the arguments must be exactly as shown
+ * color is defined as:
+ * AUTO_COLOR_RED = -1
+ * AUTO_COLOR_BLUE = 1
+ * so you can multiply numbers by color to invert the routine if necessary
+ */
 void auto_skills_1(auto_color_t color,auto_pos_t pos)
 {
-	printf("I am Auto Skills 1, color is %d, pos is %d",color,pos);
+	printf("I am Auto Skills 1, color is %d, pos is %d\n",color,pos);
 }
 void auto_skills_2(auto_color_t color,auto_pos_t pos)
 {
-	printf("I am Auto Skills 2, color is %d, pos is %d",color,pos);
+	printf("I am Auto Skills 2, color is %d, pos is %d\n",color,pos);
 }
 void auto_skills_3(auto_color_t color,auto_pos_t pos)
 {
-	printf("I am Auto Skills 3, color is %d, pos is %d",color,pos);
+	printf("I am Auto Skills 3, color is %d, pos is %d\n",color,pos);
 }
 void auto_skills_4(auto_color_t color,auto_pos_t pos)
 {
-	printf("I am Auto Skills 4, color is %d, pos is %d",color,pos);
+	printf("I am Auto Skills 4, color is %d, pos is %d\n",color,pos);
 }
 void auto_match_p1_1(auto_color_t color,auto_pos_t pos)
 {
-	printf("I am Auto Match P1 1, color is %d, pos is %d",color,pos);
+	printf("I am Auto Match P1 1, color is %d, pos is %d\n",color,pos);
 }
 void auto_match_p1_2(auto_color_t color,auto_pos_t pos)
 {
-	printf("I am Auto Match P1 2, color is %d, pos is %d",color,pos);
+	printf("I am Auto Match P1 2, color is %d, pos is %d\n",color,pos);
 }
 void auto_match_p2_1(auto_color_t color,auto_pos_t pos)
 {
-	printf("I am Auto Match P2 1, color is %d, pos is %d",color,pos);
+	printf("I am Auto Match P2 1, color is %d, pos is %d\n",color,pos);
 }
 void auto_match_p2_2(auto_color_t color,auto_pos_t pos)
 {
-	printf("I am Auto Match P2 2, color is %d, pos is %d",color,pos);
+	printf("I am Auto Match P2 2, color is %d, pos is %d\n",color,pos);
 }
 void auto_match_p2_3(auto_color_t color,auto_pos_t pos)
 {
-	printf("I am Auto Match P2 3, color is %d, pos is %d",color,pos);
+	printf("I am Auto Match P2 3, color is %d, pos is %d\n",color,pos);
 }
 
 
@@ -126,6 +131,9 @@ void autonomous()
  */
 void opcontrol() 
 {
-
-
+	/* If you want to use the screen for your own purposes,
+	 * auto_clean will clean up anything created by
+	 * the auto selector
+	 */
+	auto_clean();
 }
