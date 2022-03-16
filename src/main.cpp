@@ -51,6 +51,23 @@ void auto_match_p2_3(auto_color_t color,auto_pos_t pos)
 }
 
 
+/* Optional Pre-Auto function
+ * This function performs any preparations you need prior to running Autonomous
+ * It is selected by pressing the lowest button in the selector list
+ * The currently selected color and position are available like a match auto
+ * The selection on screen will show RED until the pre-auto function returns
+ */
+void pre_auto(auto_color_t color,auto_pos_t pos)
+{
+	printf("Entering Pre-Auto\n");
+	/* Wait for fingers to get off */
+	pros::Task::delay(500);
+	/* Calibrate the IMU */
+	pros::Task::delay(2000);
+	printf("Exiting Pre-Auto\n");
+}
+
+
 /* List of autonomous routines
  * It must be defined exactly like this
  * Each entry in the list has 3 objects:
@@ -82,10 +99,17 @@ const auto_routine_t auto_list[] =
  */
 void initialize() 
 {
+	printf("Initialize!\n");
 	/* Call Auto Picker to initialize it
 	 * Once this is called the picker will remain active until cleaned
 	 */
 	auto_picker(auto_list, sizeof(auto_list)/sizeof(auto_routine_t));
+
+	/* If you'd like to use a pre-auto function, you must define it right after auto_picker
+	 * If the user has already clicked a position, clicking on another
+	 * position will cause the pre-auto entry to become available
+	 */
+	auto_pre_auto(pre_auto);
 }
 
 /**

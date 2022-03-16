@@ -47,6 +47,9 @@ typedef struct
 /* Function to run the auto picker */
 void auto_picker(const auto_routine_t * list, size_t length);
 
+/* Tell the picker we have a pre-auto function */
+void auto_pre_auto(auto_func_t pre_auto);
+
 /* Function to run the picked autonomous */
 void auto_run(void);
 
